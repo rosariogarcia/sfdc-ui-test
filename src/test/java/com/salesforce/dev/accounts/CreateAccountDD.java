@@ -35,9 +35,8 @@ public class CreateAccountDD {
     private NavigationBar navigationBar;
 
     @DataProvider(name = "dataDriven")
-    public Iterator<Account[]> getValues() {
-        DataDrivenManager dataDrivenManager = new DataDrivenManager();
-        return dataDrivenManager.getAccountsDD("AccountsBaseDD.json");
+    public Iterator<Object[]> getValues() {
+        return DataDrivenManager.getObjects("AccountsBaseDD.json", Account.class);
     }
 
     @BeforeMethod(groups = {"Acceptance"})

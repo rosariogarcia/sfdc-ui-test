@@ -54,9 +54,8 @@ public class CreateContactView {
     private CampaignForm campaignForm;
 
     @DataProvider(name = "dataDriven")
-    public Iterator<ViewSalesForce[]> getValues() {
-        DataDrivenManager dataDrivenManager = new DataDrivenManager();
-        return dataDrivenManager.getDataView("CreateContactView.json");
+    public Iterator<Object[]> getValues() {
+        return DataDrivenManager.getObjects("CreateContactView.json", ViewSalesForce.class);
     }
 
     @BeforeMethod(groups = {"Acceptance"})

@@ -2,6 +2,7 @@ package com.salesforce.dev.chatter;
 
 import com.salesforce.dev.framework.dto.Chatter;
 import com.salesforce.dev.framework.utils.DataDrivenManager;
+import com.salesforce.dev.framework.utils.JSONMapper;
 import com.salesforce.dev.pages.LoginPage;
 import com.salesforce.dev.pages.MainPage;
 import com.salesforce.dev.pages.base.NavigationBar;
@@ -22,9 +23,11 @@ import java.util.Iterator;
  * @since 9/3/2015
  */
 public class EditPostChatter {
+
+    private static final JSONMapper JSON_MAPPER_INSTANCE = JSONMapper.getInstance();
+
     private ChatterHome chatterHome;
     private Chatter createChatter;
-    private DataDrivenManager dataDrivenManager = new DataDrivenManager();
 
     @BeforeMethod(groups = {"Acceptance"})
     public void setUp() {
@@ -47,8 +50,8 @@ public class EditPostChatter {
     }
 
     private Chatter getChatter(String fileJson) {
-        Iterator<Chatter[]> chattersData = dataDrivenManager.getChatter(fileJson);
-        return chattersData.next()[0];
+        Chatter chatter = (Chatter) JSON_MAPPER_INSTANCE.getGeneric(new Chatter(),fileJson);
+        return  chatter;
     }
 
     @AfterMethod(groups = {"Acceptance"})

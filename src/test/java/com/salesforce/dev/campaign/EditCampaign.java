@@ -59,9 +59,8 @@ public class EditCampaign {
     }
 
     @DataProvider(name = "dataDriven")
-    public Iterator<Campaign[]> getValues() {
-        DataDrivenManager dataDrivenManager = new DataDrivenManager();
-        return dataDrivenManager.getCampaign("EditCampaign.json");
+    public Iterator<Object[]> getValues() {
+        return DataDrivenManager.getObjects("EditCampaign.json", Campaign.class);
     }
 
     @Test(groups = {"Acceptance"}, dataProvider = "dataDriven")

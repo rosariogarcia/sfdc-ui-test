@@ -16,20 +16,8 @@ import static com.salesforce.dev.framework.utils.Constants.SRC_TEST_RESOURCES_JS
  * @author jimmy vargas on 6/22/2015.
  * @author Mijhail Villarroel
  */
-public class JSONMapper<T> {
+public class JSONMapper {
 
-    private static JSONMapper instance;
-
-
-    private JSONMapper () {
-    }
-
-    public static  JSONMapper getInstance() {
-        if(instance == null){
-            instance = new JSONMapper();
-        }
-        return instance;
-    }
 
     /**
      * Return T generic any class
@@ -38,15 +26,16 @@ public class JSONMapper<T> {
      * @param nameJson Path of a json.
      * @return
      */
-    public  T getGeneric(T elementClass, String nameJson) {
-        final String pathFileJson = SRC_TEST_RESOURCES_JSON.concat(nameJson) ;
+    public  static <T> T getGeneric(Class<T> elementClass, String nameJson) {
+        final String pathFileJson = SRC_TEST_RESOURCES_JSON.concat(nameJson);
+        Object result = null;
         try {
             ObjectMapper mapper = new ObjectMapper();
-            elementClass = mapper.readValue(new File(pathFileJson), (Class<T>) elementClass.getClass());
+             result =mapper.readValue(new File(pathFileJson), elementClass);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return elementClass;
+        return (T)result;
     }
 
 

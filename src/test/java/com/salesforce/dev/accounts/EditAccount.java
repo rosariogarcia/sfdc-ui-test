@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 
 import java.util.Map;
 
+import static com.salesforce.dev.framework.utils.JSONMapper.*;
 import static org.testng.Assert.assertEquals;
 
 /**
@@ -24,8 +25,6 @@ import static org.testng.Assert.assertEquals;
  * @since 13/06/2015.
  */
 public class EditAccount {
-
-    private static final JSONMapper JSON_MAPPER_INSTANCE = JSONMapper.getInstance();
 
     private AccountDetail accountDetail;
 
@@ -42,8 +41,7 @@ public class EditAccount {
     @BeforeMethod(groups = {"Acceptance"})
     public void setUp() {
         MainPage mainPage = LoginPage.loginAsPrimaryUser();
-        account = (Account) JSON_MAPPER_INSTANCE.getGeneric(new Account(), "CreateAccountBase.json");
-
+        account = getGeneric(Account.class,"CreateContact.json");
         navigationBar = mainPage.gotoNavBar();
         accountsHome = navigationBar.goToAccountsHome();
         accountForm = accountsHome.clickNewBtn();

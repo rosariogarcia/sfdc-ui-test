@@ -33,9 +33,8 @@ public class EditLeadsViewBasic {
     private LeadViewDetail leadViewDetail;
 
     @DataProvider(name = "dataDriven")
-    public Iterator<ViewSalesForce[]> getValues() {
-        DataDrivenManager dataDrivenManager = new DataDrivenManager();
-        return dataDrivenManager.getDataView("EditLeadsViewBasic.json");
+    public Iterator<Object[]> getValues() {
+        return DataDrivenManager.getObjects("EditLeadsViewBasic.json", ViewSalesForce.class);
     }
 
     @BeforeMethod(groups = {"Acceptance"})

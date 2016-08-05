@@ -255,6 +255,7 @@ public class LeadForm extends FormBase {
     public void setPhone (String phone) {
         if (phone != null) {
             fillTextBox (this.phone, phone);
+
         }
     }
 

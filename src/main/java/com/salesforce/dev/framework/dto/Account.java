@@ -1,6 +1,6 @@
 package com.salesforce.dev.framework.dto;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 import com.salesforce.dev.pages.accounts.AccountSteps;
@@ -37,16 +37,27 @@ import static com.salesforce.dev.pages.accounts.AccountSteps.ACCOUNT_WEBSITE;
 public class Account {
 
     private String accountName;
+
     private String accountDesc;
+
     private String rating;
+
     private String ownership;
+
     private String phone;
+
     private String fax;
+
     private String number;
+
     private String website;
+
     private String accountSite;
+
     private String tickerSymbol;
+    
     private String type;
+
     private String industry;
     private Integer employees;
     private Integer annualRevenue;
@@ -60,8 +71,6 @@ public class Account {
     private String slaExpirationDate;
     private String slaSerialNumber;
     private Integer numberOfLocations;
-
-    public Account(){}
 
     public String getAccountName() {
         return accountName;
@@ -220,7 +229,7 @@ public class Account {
     }
 
     public void setUpSellOpportunity(String opportunity) {
-        this.upSellOpportunity = this.upSellOpportunity;
+        this.upSellOpportunity = opportunity;
     }
 
     public String getActive() {
@@ -256,8 +265,8 @@ public class Account {
     }
 
     public Map<AccountSteps, Object> convertToMap() {
-        Map<AccountSteps, Object> mapAccount = new HashMap<>();
-        mapAccount.put(ACCOUNT_NUMBER,number);
+        Map<AccountSteps, Object> mapAccount = new EnumMap<>(AccountSteps.class);
+        mapAccount.put(ACCOUNT_NUMBER, number);
         mapAccount.put(ACCOUNT_SITE, accountSite);
         mapAccount.put(ACCOUNT_TYPE, type);
         mapAccount.put(ACCOUNT_INDUSTRY, industry);
@@ -265,26 +274,26 @@ public class Account {
         mapAccount.put(ACCOUNT_RATING, rating);
         mapAccount.put(ACCOUNT_PHONE, phone);
         mapAccount.put(ACCOUNT_NAME, getAccountName());
-        mapAccount.put(ACCOUNT_FAX, fax );
+        mapAccount.put(ACCOUNT_FAX, fax);
         mapAccount.put(ACCOUNT_WEBSITE, website);
-        mapAccount.put(ACCOUNT_THICKER, tickerSymbol );
+        mapAccount.put(ACCOUNT_THICKER, tickerSymbol);
         mapAccount.put(ACCOUNT_OWNER_SHIP, ownership);
         mapAccount.put(ACCOUNT_EMPLOYEES, employees);
         mapAccount.put(ACCOUNT_SICCODE, sicCode);
-        mapAccount.put(ACCOUNT_BILLING_STREET,billingAddress);
-        mapAccount.put(ACCOUNT_SHIPPING_STREET, shippingAddress );
-        mapAccount.put(ACCOUNT_CUSTOMER_PRIORITY, customerPriority );
-        mapAccount.put(ACCOUNT_SLA_EXPIRATION_DATE, slaExpirationDate );
+        mapAccount.put(ACCOUNT_BILLING_STREET, billingAddress);
+        mapAccount.put(ACCOUNT_SHIPPING_STREET, shippingAddress);
+        mapAccount.put(ACCOUNT_CUSTOMER_PRIORITY, customerPriority);
+        mapAccount.put(ACCOUNT_SLA_EXPIRATION_DATE, slaExpirationDate);
         mapAccount.put(ACCOUNT_NUMBER_LOCATIONS, numberOfLocations);
-        mapAccount.put(ACCOUNT_ACTIVE, active );
+        mapAccount.put(ACCOUNT_ACTIVE, active);
         mapAccount.put(ACCOUNT_SLA, sla);
-        mapAccount.put(ACCOUNT_SLASERIAL_NUMBER, slaSerialNumber );
-        mapAccount.put(ACCOUNT_UPSELL_OPPORTUNITY, upSellOpportunity );
-        mapAccount.put(ACCOUNT_DESCRIPTION, accountDesc );
-        Map<AccountSteps, Object> newAccountMap = new HashMap<>();
+        mapAccount.put(ACCOUNT_SLASERIAL_NUMBER, slaSerialNumber);
+        mapAccount.put(ACCOUNT_UPSELL_OPPORTUNITY, upSellOpportunity);
+        mapAccount.put(ACCOUNT_DESCRIPTION, accountDesc);
+        Map<AccountSteps, Object> newAccountMap = new EnumMap<>(AccountSteps.class);
         mapAccount.entrySet().stream()
                 .filter(step -> step.getValue() != null)
-                .forEach(step -> newAccountMap.put(step.getKey(),step.getValue()));
+                .forEach(step -> newAccountMap.put(step.getKey(), step.getValue()));
         return newAccountMap;
     }
 }

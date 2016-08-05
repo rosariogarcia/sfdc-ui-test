@@ -35,9 +35,8 @@ public class EditContactView {
     private static final String NAME_TEST = "anyName";
 
     @DataProvider(name = "dataDriven")
-    public Iterator<ViewSalesForce[]> getValues() {
-        DataDrivenManager dataDrivenManager = new DataDrivenManager();
-        return dataDrivenManager.getDataView("EditContactView.json");
+    public Iterator<Object[]> getValues() {
+        return DataDrivenManager.getObjects("EditContactView.json", ViewSalesForce.class);
     }
 
     @BeforeMethod(groups = {"Acceptance"})

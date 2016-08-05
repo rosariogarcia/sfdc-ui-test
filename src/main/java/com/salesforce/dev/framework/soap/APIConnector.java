@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
  * class to connect by API to sales force.
  *
  * @author Veronica Prado
+ * @author DanielGonzales
  */
 public class APIConnector {
 

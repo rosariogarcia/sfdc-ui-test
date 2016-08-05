@@ -28,9 +28,7 @@ import com.salesforce.dev.pages.leads.LeadsHome;
  * @since 6/15/2015.
  */
 public class CreateLead {
-
-    public static final JSONMapper JSON_MAPPER_INSTANCE = JSONMapper.getInstance();
-
+    
     private NavigationBar navBar;
 
     private Lead lead;
@@ -41,7 +39,7 @@ public class CreateLead {
 
     private String parentCampaign = "CampaignParent";
 
-    private MainPage mainPage;
+    private MainPage mainPage; 
 
     private NavigationBar navigationBar;
 
@@ -49,7 +47,7 @@ public class CreateLead {
     public void setUp() {
         mainPage = LoginPage.loginAsPrimaryUser();
         navBar = mainPage.gotoNavBar();
-        lead = (Lead) JSON_MAPPER_INSTANCE.getGeneric(new Lead(), "CreateLead.json");
+        lead = JSONMapper.getGeneric(Lead.class,"CreateLead.json");
         Campaign campaign = CampaignGenie.getCampaign();
         CampaignGenie.createParentCampaign(campaign.getParentCampaign());
     }

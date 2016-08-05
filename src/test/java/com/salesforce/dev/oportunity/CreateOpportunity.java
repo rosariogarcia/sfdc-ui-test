@@ -22,7 +22,7 @@ import org.testng.annotations.Test;
  */
 public class CreateOpportunity {
 
-    public static final JSONMapper JSON_MAPPER_INSTANCE = JSONMapper.getInstance();
+
 
     private MainPage mainPage;
 
@@ -34,7 +34,7 @@ public class CreateOpportunity {
     public void setUp() {
         mainPage = LoginPage.loginAsPrimaryUser();
         navBar = mainPage.gotoNavBar();
-        oppEnum = (Opportunity) JSON_MAPPER_INSTANCE.getGeneric(new Opportunity(),"CreateOpportunityBase.json");
+        oppEnum = JSONMapper.getGeneric(Opportunity.class,"CreateOpportunityBase.json");
     }
 
     @Test(groups = {"Acceptance"})

@@ -41,9 +41,8 @@ public class CreateAccountViewFiltersFieldsAdded {
     private ViewDetailBase accountViewDetail;
 
     @DataProvider(name = "dataDriven")
-    public Iterator<ViewSalesForce[]> getValues() {
-        DataDrivenManager dataDrivenManager = new DataDrivenManager();
-        return dataDrivenManager.getDataView("CreateAccountsViewFiltersFieldAdded.json");
+    public Iterator<Object[]> getValues() {
+        return DataDrivenManager.getObjects("CreateAccountsViewFiltersFieldAdded.json", ViewSalesForce.class);
     }
 
     @Test(groups = {"Acceptance"}, dataProvider = "dataDriven")

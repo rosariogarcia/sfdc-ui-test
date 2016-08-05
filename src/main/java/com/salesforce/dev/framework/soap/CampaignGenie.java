@@ -22,22 +22,20 @@ public class CampaignGenie {
     private static final Logger LOGGER = Logger.getLogger(CampaignGenie.class.getName());
 
     public static ViewSalesForce getCampaignView(String jsonFile) {
-        DataDrivenManager dataDrivenManager = new DataDrivenManager();
-        Iterator<ViewSalesForce[]> iteratorViewData = dataDrivenManager.getDataView(jsonFile);
+        Iterator<Object[]> iteratorViewData = DataDrivenManager.getObjects(jsonFile, ViewSalesForce.class);
         List<ViewSalesForce[]> listData = new ArrayList<>();
         while (iteratorViewData.hasNext()) {
-            listData.add(iteratorViewData.next());
+            listData.add((ViewSalesForce[])iteratorViewData.next());
         }
         ViewSalesForce viewSalesForce = listData.get(0)[0];
         return viewSalesForce;
     }
 
     public static Campaign getCampaign() {
-        DataDrivenManager dataDrivenManager = new DataDrivenManager();
-        Iterator<Campaign[]> iteratorCampaignData = dataDrivenManager.getCampaign("CreateCampaign.json");
+        Iterator<Object[]> iteratorCampaignData = DataDrivenManager.getObjects("CreateCampaign.json", Campaign.class);
         List<Campaign[]> listData = new ArrayList<>();
         while (iteratorCampaignData.hasNext()) {
-            listData.add(iteratorCampaignData.next());
+            listData.add((Campaign[]) iteratorCampaignData.next());
         }
         Campaign campaign = listData.get(0)[0];
         return campaign;
