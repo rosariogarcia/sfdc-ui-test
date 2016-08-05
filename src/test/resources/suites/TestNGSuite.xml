@@ -1,8 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="SuiteFull" verbose="1" >
-    <listeners>
-        <listener class-name="com.salesforce.dev.framework.testng.TestListener" />
-    </listeners>
     <test name="Full">
         <classes>
             <class name="com.salesforce.dev.campaign.CreateCampaign"/>
