@@ -1,8 +1,5 @@
 package com.salesforce.dev;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import com.salesforce.dev.pages.LoginPage;
 import com.salesforce.dev.pages.MainPage;
 import com.salesforce.dev.pages.accounts.AccountsHome;
@@ -12,14 +9,14 @@ import com.salesforce.dev.pages.cases.CasesHome;
 import com.salesforce.dev.pages.chatter.ChatterHome;
 import com.salesforce.dev.pages.contacts.ContactsHome;
 import com.salesforce.dev.pages.contracts.ContractsHome;
-import com.salesforce.dev.pages.dashboards.DashboardsHome;
 import com.salesforce.dev.pages.forecasts.ForecastsHome;
 import com.salesforce.dev.pages.leads.LeadsHome;
 import com.salesforce.dev.pages.opportunities.OpportunitiesHome;
 import com.salesforce.dev.pages.orders.OrdersHome;
-import com.salesforce.dev.pages.product.ProductsHome;
-import com.salesforce.dev.pages.reports.ReportsHome;
 import com.salesforce.dev.pages.solutions.SolutionsHome;
+
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertTrue;
 
@@ -74,14 +71,5 @@ public class VerifyAllHomeTabs {
 
         SolutionsHome solutionsHome = navigationBar.goToSolutionsHome();
         assertTrue(solutionsHome.isUserInSolutionsTab(), "Solutions page not displayed");
-
-        ProductsHome productsHome = navigationBar.goToProductsHome();
-        assertTrue(productsHome.isUserInProductsTab(), "Products page not displayed");
-
-        ReportsHome reportsHome = navigationBar.goToReportsHome();
-        assertTrue(reportsHome.isUserInReportsTab(), "Reports page not displayed");
-
-        DashboardsHome dashboardsHome = navigationBar.goToDashboardsHome();
-        assertTrue(dashboardsHome.isUserInDashboardsTab(), "Dashboard page not displayed");
     }
 }
