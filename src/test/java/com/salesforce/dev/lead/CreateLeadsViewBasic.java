@@ -1,21 +1,18 @@
 package com.salesforce.dev.lead;
 
-import java.util.Iterator;
-
-import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
-
 import com.salesforce.dev.framework.dto.ViewSalesForce;
-import com.salesforce.dev.framework.utils.DataDrivenManager;
+import com.salesforce.dev.framework.utils.JSONMapper;
 import com.salesforce.dev.pages.LoginPage;
 import com.salesforce.dev.pages.MainPage;
 import com.salesforce.dev.pages.base.NavigationBar;
 import com.salesforce.dev.pages.leads.LeadView;
 import com.salesforce.dev.pages.leads.LeadViewDetail;
 import com.salesforce.dev.pages.leads.LeadsHome;
+
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 
 /**
@@ -36,19 +33,17 @@ public class CreateLeadsViewBasic {
 
     private LeadViewDetail leadViewDetail;
 
-    @DataProvider(name = "dataDriven")
-    public Iterator<Object[]> getValues() {
-        return DataDrivenManager.getObjects("CreateLeadsViewBasic.json", ViewSalesForce.class);
-    }
+    private ViewSalesForce viewSalesForce;
 
     @BeforeMethod(groups = {"Acceptance"})
     public void setUp() {
+        viewSalesForce = JSONMapper.getGeneric(ViewSalesForce.class,"CreateLeadsViewBasic.json");
         mainPage = LoginPage.loginAsPrimaryUser();
         navBar = mainPage.gotoNavBar();
     }
 
-    @Test(groups = {"Acceptance"}, dataProvider = "dataDriven")
-    public void testCreateLeadView(ViewSalesForce viewSalesForce) {
+    @Test(groups = {"Acceptance"})
+    public void testCreateLeadView( ) {
         leadsHome = navBar.gotToLeadsHome();
         leadView = leadsHome.clickNewViewLnk()
                 .setViewName(viewSalesForce.getViewName())

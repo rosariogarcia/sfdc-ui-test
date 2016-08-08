@@ -69,7 +69,7 @@ public class CreateContact {
         navigationBar = mainPage.gotoNavBar();
         contactsHome = navigationBar.goToContactsHome();
         contactForm = contactsHome.clickNewBtn();
-        Contact contact = JSONMapper.getGeneric(Contact.class,"CreateAccountBase.json");
+        Contact contact = JSONMapper.getGeneric(Contact.class,"CreateContact.json");
         contactForm.setFirstNameRole(contact.getcontactRole())
                 .setFirstName(contact.getcontactRole())
                 .setFirstName(contact.getFirstName())

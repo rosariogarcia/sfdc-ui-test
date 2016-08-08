@@ -1,9 +1,5 @@
 package com.salesforce.dev.oportunity;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import com.salesforce.dev.framework.dto.Opportunity;
 import com.salesforce.dev.framework.utils.JSONMapper;
 import com.salesforce.dev.pages.LoginPage;
@@ -14,6 +10,10 @@ import com.salesforce.dev.pages.opportunities.OpportunitiesHome;
 import com.salesforce.dev.pages.opportunities.OpportunityBuilder;
 import com.salesforce.dev.pages.opportunities.OpportunityDetail;
 import com.salesforce.dev.pages.opportunities.OpportunityForm;
+
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * This class will be used to test the creation of an Opportunity in Salesforce web application.
@@ -59,7 +59,6 @@ public class CreateOpportunity {
                 .build();
         OpportunityDetail opportunityDetails = opForm.clickSaveBtn();
         opportunityDetails.validateFields(oppEnum);
-
     }
 
     @AfterMethod(groups = {"Acceptance"})

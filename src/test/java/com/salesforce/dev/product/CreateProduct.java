@@ -26,6 +26,11 @@ public class CreateProduct {
     private ProductForm productForm;
     private ProductDetails productDetails;
 
+    @DataProvider
+    public Object[][] getProductValues() {
+        return new Object[][]{{"New product", "Code", "this is an new product"}};
+    }
+
     @BeforeMethod(groups = {"Acceptance"})
     public void setUp() {
         MainPage mainPage = LoginPage.loginAsPrimaryUser();
@@ -48,10 +53,5 @@ public class CreateProduct {
     @AfterMethod(groups = {"Acceptance"})
     public void tearDown() {
         productDetails.clickDeleteButton();
-    }
-
-    @DataProvider
-    public Object[][] getProductValues() {
-        return new Object[][]{{"New product", "Code", "this is an new product"}};
     }
 }

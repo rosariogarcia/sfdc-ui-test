@@ -142,7 +142,7 @@ public class AccountForm extends FormBase {
     @FindBy(xpath = "//label[contains(.,'SLA Serial Number')]/following::input")
     private WebElement accountSLASerialNumberFld;
 
-    @FindBy(id = "00N50000006a5Xp")
+    @FindBy(xpath = "//label[contains(.,'Upsell Opportunity')]/following::select")
     private WebElement accountUpsellOpportunityFld;
 
     //Description Information

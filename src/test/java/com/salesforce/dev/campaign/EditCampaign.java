@@ -6,6 +6,7 @@ import java.util.Map;
 import com.salesforce.dev.framework.dto.Campaign;
 import com.salesforce.dev.framework.soap.CampaignGenie;
 import com.salesforce.dev.framework.utils.DataDrivenManager;
+import com.salesforce.dev.framework.utils.JSONMapper;
 import com.salesforce.dev.pages.LoginPage;
 import com.salesforce.dev.pages.MainPage;
 import com.salesforce.dev.pages.base.NavigationBar;
@@ -47,10 +48,12 @@ public class EditCampaign {
 
     private NavigationBar navigationBar;
 
+    private Campaign editCampaignData;
+
     @BeforeMethod(groups = {"Acceptance"})
     public void setUp() {
-
-        Campaign campaign = CampaignGenie.getCampaign();
+        editCampaignData = JSONMapper.getGeneric(Campaign.class,"EditCampaign.json");
+        Campaign campaign = JSONMapper.getGeneric(Campaign.class,"CreateCampaign.json");
         CampaignGenie.createParentCampaign(campaign.getParentCampaign());
         campaignNameToUpdated = campaign.getCampaignName();
         campaignParentName = campaign.getParentCampaign();
@@ -70,30 +73,30 @@ public class EditCampaign {
         return DataDrivenManager.getObjects("EditCampaign.json", Campaign.class);
     }
 
-    @Test(groups = {"Acceptance"}, dataProvider = "dataDriven")
-    public void testEditCampaign(Campaign campaign) {
+    @Test(groups = {"Acceptance"})
+    public void testEditCampaign() {
         campaignsHome = navigationBar.goToCampaignsHome();
         campaignDetail = campaignsHome.selectRecentItem(campaignNameToUpdated);
         campaignForm = campaignDetail.clickEditBtn()
-                .setCampaignName(campaign.getCampaignName())
-                .setTypeSelect(campaign.getCampaignType())
-                .setStatusSelect(campaign.getCampaignStatus())
-                .setStartDate(campaign.getStartDate())
-                .setEndDate(campaign.getEndDate())
+                .setCampaignName(editCampaignData.getCampaignName())
+                .setTypeSelect(editCampaignData.getCampaignType())
+                .setStatusSelect(editCampaignData.getCampaignStatus())
+                .setStartDate(editCampaignData.getStartDate())
+                .setEndDate(editCampaignData.getEndDate())
                 .clickPanel()
-                .setExpectedRevenue(campaign.getExpectedRevenue())
-                .setBudgetedCost(campaign.getBudgetedCost())
-                .setActualCost(campaign.getActualCost())
-                .setExpectedResponse(campaign.getExpectedResponse())
-                .setNumSent(campaign.getNumSent());
+                .setExpectedRevenue(editCampaignData.getExpectedRevenue())
+                .setBudgetedCost(editCampaignData.getBudgetedCost())
+                .setActualCost(editCampaignData.getActualCost())
+                .setExpectedResponse(editCampaignData.getExpectedResponse())
+                .setNumSent(editCampaignData.getNumSent());
         SearchLookupBase searchLookup = campaignForm.clickLookupParentCampaign();
-        searchLookup.searchText(campaign.getParentCampaign());
+        searchLookup.searchText(editCampaignData.getParentCampaign());
         campaignForm = searchLookup.goToCampaignForm();
         campaignDetail = campaignForm.clickSaveBtn();
 
-        campaignParentName = campaign.getParentCampaign();
+        campaignParentName = editCampaignData.getParentCampaign();
 
-        Map<CampaignSteps, Object> mapCampaign = campaign.convertToMap();
+        Map<CampaignSteps, Object> mapCampaign = editCampaignData.convertToMap();
         Map<Enum, Object> mapExpected = campaignDetail.getAssertionMap();
         mapCampaign.keySet().stream().forEach(step -> assertEquals(String.valueOf(mapExpected.get(step)), String.valueOf(mapCampaign.get(step))));
     }

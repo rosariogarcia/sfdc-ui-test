@@ -152,14 +152,8 @@ public class OpportunityForm extends FormBase {
         if ("today".equalsIgnoreCase(closeDate)) {
             todayLink.click();
         } else {
-            String[] date = closeDate.split("/");
-
-            int month = Integer.parseInt(date[0]);
-            int day = Integer.parseInt(date[1]);
-            int year = Integer.parseInt(date[2]);
-
-            closeDateField.click();
-            selectDatePicker(month, day, year);
+            closeDateField.clear();
+            closeDateField.sendKeys(closeDate);
         }
     }
 

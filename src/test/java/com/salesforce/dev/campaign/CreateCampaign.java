@@ -1,11 +1,10 @@
 package com.salesforce.dev.campaign;
 
-import java.util.Iterator;
 import java.util.Map;
 
 import com.salesforce.dev.framework.dto.Campaign;
 import com.salesforce.dev.framework.soap.CampaignGenie;
-import com.salesforce.dev.framework.utils.DataDrivenManager;
+import com.salesforce.dev.framework.utils.JSONMapper;
 import com.salesforce.dev.pages.LoginPage;
 import com.salesforce.dev.pages.MainPage;
 import com.salesforce.dev.pages.base.DetailsBase;
@@ -17,7 +16,6 @@ import com.salesforce.dev.pages.campaigns.CampaignsHome;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
@@ -36,22 +34,20 @@ public class CreateCampaign {
     private DetailsBase campaignDetail;
 
     private NavigationBar navigationBar;
-
-    @DataProvider(name = "dataDriven")
-    public Iterator<Object[]> getValues() {
-        return DataDrivenManager.getObjects("CreateCampaign.json", Campaign.class);
-    }
+    Campaign campaign;
 
     @BeforeMethod(groups = {"Acceptance"})
     public void setUp() {
-        parentCampaign = CampaignGenie.getCampaign().getParentCampaign();
+        campaign= JSONMapper.getGeneric(Campaign.class,"CreateCampaign.json");
+        parentCampaign = campaign.getParentCampaign();
         CampaignGenie.createParentCampaign(parentCampaign);
         MainPage mainPage = LoginPage.loginAsPrimaryUser();
         navigationBar = mainPage.gotoNavBar();
+
     }
 
-    @Test(groups = {"Acceptance"}, dataProvider = "dataDriven")
-    public void testCreateCampaign(Campaign campaign) {
+    @Test(groups = {"Acceptance"})
+    public void testCreateCampaign() {
         CampaignsHome campaignsHome = navigationBar.goToCampaignsHome();
         CampaignForm campaignForm = campaignsHome.clickNewBtn()
                 .setEndDate(campaign.getEndDate())

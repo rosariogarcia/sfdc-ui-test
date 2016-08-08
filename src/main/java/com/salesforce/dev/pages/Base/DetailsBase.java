@@ -29,7 +29,7 @@ public abstract class DetailsBase extends AbstractBasePage {
     @FindBy(name = "del")
     private WebElement deleteBtn;
 
-    @FindBy(name = "delete")
+    @FindBy(css="input[title='Delete']")
     private WebElement deleteAccBtn;
 
     @FindBy(name = "clone")

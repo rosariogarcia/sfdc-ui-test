@@ -30,6 +30,11 @@ public class EditProduct {
     private MainPage mainPage;
     private NavigationBar navigationBar;
 
+    @DataProvider
+    public Object[][] getProductValues() {
+        return new Object[][]{{"New product update", "Codigo2", "this is an update product"}};
+    }
+
     @BeforeMethod(groups = {"Acceptance"})
     public void setUp() {
         final String productName = "New product";
@@ -60,11 +65,6 @@ public class EditProduct {
     public void tearDown() {
         productDetails.clickDeleteButton();
 
-    }
-
-    @DataProvider
-    public Object[][] getProductValues() {
-        return new Object[][]{{"New product update", "Codigo2", "this is an update product"}};
     }
 }
 

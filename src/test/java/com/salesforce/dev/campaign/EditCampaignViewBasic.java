@@ -1,10 +1,7 @@
 package com.salesforce.dev.campaign;
 
-import java.util.Iterator;
-
 import com.salesforce.dev.framework.dto.ViewSalesForce;
-import com.salesforce.dev.framework.soap.CampaignGenie;
-import com.salesforce.dev.framework.utils.DataDrivenManager;
+import com.salesforce.dev.framework.utils.JSONMapper;
 import com.salesforce.dev.pages.LoginPage;
 import com.salesforce.dev.pages.MainPage;
 import com.salesforce.dev.pages.base.NavigationBar;
@@ -14,7 +11,6 @@ import com.salesforce.dev.pages.campaigns.CampaignsHome;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertTrue;
@@ -39,14 +35,14 @@ public class EditCampaignViewBasic {
 
     private ViewDetailBase campaignViewDetail;
 
-    @DataProvider(name = "dataDriven")
-    public Iterator<Object[]> getValues() {
-        return DataDrivenManager.getObjects("EditCampaignViewBasic.json", ViewSalesForce.class);
-    }
+    private ViewSalesForce viewSalesForceUpdate;
+
+
 
     @BeforeMethod(groups = {"Acceptance"})
     public void setUp() {
-        ViewSalesForce viewSalesForce = CampaignGenie.getCampaignView("CreateCampaignViewBasic.json");
+        viewSalesForceUpdate = JSONMapper.getGeneric(ViewSalesForce.class,"EditCampaignViewBasic.json");
+        ViewSalesForce viewSalesForce = JSONMapper.getGeneric(ViewSalesForce.class,"CreateCampaignViewBasic.json");
         nameView = viewSalesForce.getViewName();
         mainPage = LoginPage.loginAsPrimaryUser();
         navigationBar = mainPage.gotoNavBar();
@@ -57,8 +53,8 @@ public class EditCampaignViewBasic {
         campaignViewDetail = campaignView.clickSaveBtn();
     }
 
-    @Test(groups = {"Acceptance"}, dataProvider = "dataDriven")
-    public void testEditCampaign(ViewSalesForce viewSalesForceUpdate) {
+    @Test(groups = {"Acceptance"})
+    public void testEditCampaign() {
         navigationBar = mainPage.gotoNavBar();
         campaignsHome = navigationBar.goToCampaignsHome();
         campaignView = campaignsHome.clickEditViewLnk(nameView)

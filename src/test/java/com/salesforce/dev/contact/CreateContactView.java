@@ -1,12 +1,11 @@
 package com.salesforce.dev.contact;
 
-import java.util.Iterator;
 import java.util.List;
 
 import com.salesforce.dev.framework.dto.FieldToDisplayView;
 import com.salesforce.dev.framework.dto.FilterView;
 import com.salesforce.dev.framework.dto.ViewSalesForce;
-import com.salesforce.dev.framework.utils.DataDrivenManager;
+import com.salesforce.dev.framework.utils.JSONMapper;
 import com.salesforce.dev.framework.utils.RandomGenerator;
 import com.salesforce.dev.pages.LoginPage;
 import com.salesforce.dev.pages.MainPage;
@@ -19,7 +18,6 @@ import com.salesforce.dev.pages.contacts.ContactsHome;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertFalse;
@@ -48,13 +46,12 @@ public class CreateContactView {
 
     private CampaignForm campaignForm;
 
-    @DataProvider(name = "dataDriven")
-    public Iterator<Object[]> getValues() {
-        return DataDrivenManager.getObjects("CreateContactView.json", ViewSalesForce.class);
-    }
+    private ViewSalesForce viewSalesForce;
+
 
     @BeforeMethod(groups = {"Acceptance"})
     public void setUp() {
+        viewSalesForce = JSONMapper.getGeneric(ViewSalesForce.class,"CreateContactView.json");
         campaignName = "Camp" + RandomGenerator.getInstance().getRandomString();
         mainPage = LoginPage.loginAsPrimaryUser();
         navigationBar = mainPage.gotoNavBar();
@@ -65,8 +62,8 @@ public class CreateContactView {
         campaignForm.clickSaveBtn();
     }
 
-    @Test(groups = {"Acceptance"}, dataProvider = "dataDriven")
-    public void testCreateContactView(ViewSalesForce viewSalesForce) {
+    @Test(groups = {"Acceptance"})
+    public void testCreateContactView() {
         contactHome = navigationBar.goToContactsHome();
         contactView = contactHome.clickNewViewLnk()
                 .setViewName(viewSalesForce.getViewName())

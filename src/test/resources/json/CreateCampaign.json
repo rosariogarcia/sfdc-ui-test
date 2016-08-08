@@ -1,4 +1,4 @@
-[
+
      {"campaignName" :"Campaign Name",
       "campaignType" :"Webinar",
        "campaignStatus":"Completed",
@@ -11,4 +11,3 @@
        "numSent":"10",
        "parentCampaign":"CampaignParent"
      }
-]

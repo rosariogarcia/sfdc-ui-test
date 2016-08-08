@@ -1,4 +1,4 @@
-[{
+{
   "viewName":"viewUpdatedContact",
   "uniqueViewName":"viewUpdatedContact",
   "filterByOwner":"My Contacts",
@@ -19,4 +19,4 @@
     {"fieldToDisplay":"Facebook"}
   ],
   "restrictVisibility":"all users"
-}]
+}

@@ -1,10 +1,5 @@
 package com.salesforce.dev.lead;
 
-import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import com.salesforce.dev.framework.dto.Campaign;
 import com.salesforce.dev.framework.dto.Lead;
 import com.salesforce.dev.framework.soap.CampaignGenie;
@@ -19,6 +14,11 @@ import com.salesforce.dev.pages.leads.LeadBuilder;
 import com.salesforce.dev.pages.leads.LeadDetail;
 import com.salesforce.dev.pages.leads.LeadForm;
 import com.salesforce.dev.pages.leads.LeadsHome;
+
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  * This class will be used to test the creation of a lead.
@@ -44,10 +44,10 @@ public class CreateLead {
 
     @BeforeMethod(groups = {"Acceptance"})
     public void setUp() {
+        lead = JSONMapper.getGeneric(Lead.class,"CreateLead.json");
+        Campaign campaign = JSONMapper.getGeneric(Campaign.class,"CreateCampaign.json");
         mainPage = LoginPage.loginAsPrimaryUser();
         navBar = mainPage.gotoNavBar();
-        lead = JSONMapper.getGeneric(Lead.class,"CreateLead.json");
-        Campaign campaign = CampaignGenie.getCampaign();
         CampaignGenie.createParentCampaign(campaign.getParentCampaign());
     }
 

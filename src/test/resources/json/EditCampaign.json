@@ -1,4 +1,4 @@
-[
+
      {"campaignName" :"Campaign Name Update",
       "campaignType" :"Conference",
        "campaignStatus":"In Progress",
@@ -11,4 +11,3 @@
        "numSent":"10",
        "parentCampaign":"CampaignParent"
      }
-]

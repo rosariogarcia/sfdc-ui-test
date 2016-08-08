@@ -25,7 +25,7 @@
   "country":"Bolivia",
 
   "productInterest":"GC1000 series",
-  "SICCode":"GC1000",
+  "sicCode":"GC1000",
   "numberLocations":"100",
   "currentGenerators":"generator001",
   "primary":"No",

@@ -77,7 +77,7 @@ public abstract class FormBase extends AbstractBasePage {
             Select comboBox = new Select(webElement);
             comboBox.selectByVisibleText(value);
         } catch (WebDriverException e) {
-            throw new WebDriverException("The value " + value + "couldn't be selected", e);
+            throw new WebDriverException("The value " + value + " couldn't be selected", e);
         }
     }
 

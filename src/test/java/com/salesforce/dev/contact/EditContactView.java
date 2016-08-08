@@ -1,20 +1,17 @@
 package com.salesforce.dev.contact;
 
 import com.salesforce.dev.framework.dto.ViewSalesForce;
-import com.salesforce.dev.framework.soap.CampaignGenie;
-import com.salesforce.dev.framework.utils.DataDrivenManager;
+import com.salesforce.dev.framework.utils.JSONMapper;
 import com.salesforce.dev.pages.LoginPage;
 import com.salesforce.dev.pages.MainPage;
 import com.salesforce.dev.pages.base.NavigationBar;
 import com.salesforce.dev.pages.contacts.ContactView;
 import com.salesforce.dev.pages.contacts.ContactViewDetail;
 import com.salesforce.dev.pages.contacts.ContactsHome;
+
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import java.util.Iterator;
 
 import static org.testng.Assert.assertFalse;
 
@@ -34,14 +31,12 @@ public class EditContactView {
     private String nameView;
     private static final String NAME_TEST = "anyName";
 
-    @DataProvider(name = "dataDriven")
-    public Iterator<Object[]> getValues() {
-        return DataDrivenManager.getObjects("EditContactView.json", ViewSalesForce.class);
-    }
+    private ViewSalesForce viewSalesForceUpdate;
 
     @BeforeMethod(groups = {"Acceptance"})
     public void setUp() {
-        ViewSalesForce viewSalesForce = CampaignGenie.getCampaignView("CreateContactView.json");
+        viewSalesForceUpdate = JSONMapper.getGeneric(ViewSalesForce.class,"EditContactView.json");
+        ViewSalesForce viewSalesForce =  JSONMapper.getGeneric(ViewSalesForce.class,"CreateContactView.json");
         nameView = viewSalesForce.getViewName();
         mainPage = LoginPage.loginAsPrimaryUser();
         navigationBar = mainPage.gotoNavBar();
@@ -52,8 +47,8 @@ public class EditContactView {
         contactViewDetail = contactView.clickSaveBtn();
     }
 
-    @Test(groups = {"Acceptance"}, dataProvider = "dataDriven")
-    public void testEditContact(ViewSalesForce viewSalesForceUpdate) {
+    @Test(groups = {"Acceptance"})
+    public void testEditContact() {
         mainPage = LoginPage.loginAsPrimaryUser();
         navigationBar = mainPage.gotoNavBar();
         contactsHome = navigationBar.goToContactsHome();

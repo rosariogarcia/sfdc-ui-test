@@ -1,4 +1,4 @@
-[{
+{
   "viewName":"view campaign Update",
   "uniqueViewName":"viewCampaignUdate",
   "filterByOwner":"All Campaigns",
@@ -18,4 +18,4 @@
     {"fieldToDisplay":"Total Responses"}
   ],
   "restrictVisibility":"all users"
-}]
+}

@@ -30,6 +30,7 @@ import static com.salesforce.dev.pages.accounts.AccountSteps.ACCOUNT_SLASERIAL_N
 import static com.salesforce.dev.pages.accounts.AccountSteps.ACCOUNT_SLA_EXPIRATION_DATE;
 import static com.salesforce.dev.pages.accounts.AccountSteps.ACCOUNT_THICKER;
 import static com.salesforce.dev.pages.accounts.AccountSteps.ACCOUNT_TYPE;
+import static com.salesforce.dev.pages.accounts.AccountSteps.ACCOUNT_UPSELL_OPPORTUNITY;
 import static com.salesforce.dev.pages.accounts.AccountSteps.ACCOUNT_WEBSITE;
 
 
@@ -246,6 +247,7 @@ public class AccountDetail extends DetailsBase {
         assertionMap.put(ACCOUNT_ACTIVE, getAccountActiveFld());
         assertionMap.put(ACCOUNT_SLA_EXPIRATION_DATE, getAccountSLAExpirationDateFld());
         assertionMap.put(ACCOUNT_SLASERIAL_NUMBER, getAccountSerialNumberFld());
+        assertionMap.put(ACCOUNT_UPSELL_OPPORTUNITY, getAccountUpSellOpportunityFld());
         assertionMap.put(ACCOUNT_NUMBER_LOCATIONS, getAccountNumberOfLocationsFld());
         assertionMap.put(ACCOUNT_DESCRIPTION, getAccountDescriptionFld());
         return assertionMap;

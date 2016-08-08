@@ -32,11 +32,10 @@ public class EditOpportunity {
 
     @BeforeMethod(groups = {"Acceptance"})
     public void setup() {
-        mainPage = LoginPage.loginAsPrimaryUser();
-        navBar = mainPage.gotoNavBar();
-
         oppEnum = JSONMapper.getGeneric(Opportunity.class, "CreateOpportunityBase.json");
         oppEditEnum = JSONMapper.getGeneric(Opportunity.class, "EditOpportunity.json");
+        mainPage = LoginPage.loginAsPrimaryUser();
+        navBar = mainPage.gotoNavBar();
 
         ObjectGenie.createOpportunity(oppEnum);
     }
