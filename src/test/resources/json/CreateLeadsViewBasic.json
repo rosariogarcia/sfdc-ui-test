@@ -1,6 +1,6 @@
-[{
+{
   "viewName":"Basic Leads View",
   "uniqueViewName":"basicLeadsView",
   "filterByOwner":"All Unconverted Leads",
   "restrictVisibility":"Visible only to me"
-}]
+}

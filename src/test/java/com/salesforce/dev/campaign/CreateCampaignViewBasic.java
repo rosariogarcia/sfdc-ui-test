@@ -1,19 +1,17 @@
 package com.salesforce.dev.campaign;
 
 import com.salesforce.dev.framework.dto.ViewSalesForce;
-import com.salesforce.dev.framework.utils.DataDrivenManager;
+import com.salesforce.dev.framework.utils.JSONMapper;
 import com.salesforce.dev.pages.LoginPage;
 import com.salesforce.dev.pages.MainPage;
 import com.salesforce.dev.pages.base.NavigationBar;
 import com.salesforce.dev.pages.base.ViewDetailBase;
 import com.salesforce.dev.pages.campaigns.CampaignView;
 import com.salesforce.dev.pages.campaigns.CampaignsHome;
+
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import java.util.Iterator;
 
 import static org.testng.Assert.assertTrue;
 
@@ -30,20 +28,17 @@ public class CreateCampaignViewBasic {
 
     private ViewDetailBase campaignViewDetail;
 
-    @DataProvider(name = "dataDriven")
-    public Iterator<Object[]> getValues() {
-        return DataDrivenManager.getObjects("CreateCampaignViewBasic.json", ViewSalesForce.class);
-    }
-
+    private ViewSalesForce viewSalesForce;
 
     @BeforeMethod(groups = {"Acceptance"})
     public void setUp() {
+        viewSalesForce = JSONMapper.getGeneric(ViewSalesForce.class,"CreateCampaignViewBasic.json");
         MainPage mainPage = LoginPage.loginAsPrimaryUser();
         navigationBar = mainPage.gotoNavBar();
     }
 
-    @Test(groups = {"Acceptance"}, dataProvider = "dataDriven")
-    public void testCreateCampaignView(ViewSalesForce viewSalesForce) {
+    @Test(groups = {"Acceptance"})
+    public void testCreateCampaignView( ) {
         CampaignsHome campaignsHome = navigationBar.goToCampaignsHome();
         CampaignView campaignView = campaignsHome.clickNewViewLnk()
                 .setViewName(viewSalesForce.getViewName())

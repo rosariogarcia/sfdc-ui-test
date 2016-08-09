@@ -41,7 +41,7 @@ public class EditAccount {
     @BeforeMethod(groups = {"Acceptance"})
     public void setUp() {
         MainPage mainPage = LoginPage.loginAsPrimaryUser();
-        account = getGeneric(Account.class, "CreateContact.json");
+        account = getGeneric(Account.class, "CreateAccountBase.json");
         navigationBar = mainPage.gotoNavBar();
         accountsHome = navigationBar.goToAccountsHome();
         accountForm = accountsHome.clickNewBtn();

@@ -2,7 +2,6 @@ package com.salesforce.dev.lead;
 
 import com.salesforce.dev.framework.dto.ViewSalesForce;
 import com.salesforce.dev.framework.utils.JSONMapper;
-import com.salesforce.dev.framework.utils.LeadGenie;
 import com.salesforce.dev.pages.LoginPage;
 import com.salesforce.dev.pages.MainPage;
 import com.salesforce.dev.pages.base.NavigationBar;
@@ -41,7 +40,7 @@ public class EditLeadsViewBasic {
     @BeforeMethod(groups = {"Acceptance"})
     public void setUp() {
         viewSalesForceUpdate = JSONMapper.getGeneric(ViewSalesForce.class,"EditLeadsViewBasic.json");
-        ViewSalesForce viewSalesForce = LeadGenie.getLeadsView("CreateLeadsViewBasic.json");
+        ViewSalesForce viewSalesForce =  JSONMapper.getGeneric(ViewSalesForce.class,"CreateLeadsViewBasic.json");
         viewName = viewSalesForce.getViewName();
         mainPage = LoginPage.loginAsPrimaryUser();
         navigationBar = mainPage.gotoNavBar();

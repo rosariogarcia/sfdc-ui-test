@@ -172,8 +172,8 @@ public class ContactForm extends FormBase {
     }
 
     public ContactForm setBirthDate(Integer month, Integer day, Integer year) {
-        birthDayFld.click();
-        selectDatePicker(month, day, year);
+        birthDayFld.clear();
+        birthDayFld.sendKeys(String.format("%d/%d/%d",month,day,year));
         return this;
     }
 
